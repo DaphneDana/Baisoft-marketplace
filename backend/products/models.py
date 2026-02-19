@@ -16,6 +16,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default='')
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    image_url = models.URLField(max_length=500, blank=True, default='')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=DRAFT)
     business = models.ForeignKey(
         'accounts.Business', on_delete=models.CASCADE, related_name='products'

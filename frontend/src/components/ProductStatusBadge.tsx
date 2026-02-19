@@ -1,19 +1,32 @@
-const statusStyles: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-700',
-  pending_approval: 'bg-yellow-100 text-yellow-800',
-  approved: 'bg-green-100 text-green-800',
+const statusConfig: Record<string, { dot: string; bg: string; text: string; label: string }> = {
+  draft: {
+    dot: 'bg-slate-400',
+    bg: 'bg-slate-50',
+    text: 'text-slate-700',
+    label: 'Draft',
+  },
+  pending_approval: {
+    dot: 'bg-amber-400',
+    bg: 'bg-amber-50',
+    text: 'text-amber-700',
+    label: 'Pending',
+  },
+  approved: {
+    dot: 'bg-emerald-400',
+    bg: 'bg-emerald-50',
+    text: 'text-emerald-700',
+    label: 'Approved',
+  },
 };
 
-const statusLabels: Record<string, string> = {
-  draft: 'Draft',
-  pending_approval: 'Pending',
-  approved: 'Approved',
-};
+const fallback = { dot: 'bg-slate-400', bg: 'bg-slate-50', text: 'text-slate-700', label: '' };
 
 export default function ProductStatusBadge({ status }: { status: string }) {
+  const config = statusConfig[status] || { ...fallback, label: status };
   return (
-    <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${statusStyles[status] || 'bg-gray-100 text-gray-700'}`}>
-      {statusLabels[status] || status}
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text}`}>
+      <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
+      {config.label}
     </span>
   );
 }

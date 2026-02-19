@@ -63,17 +63,33 @@ class Command(BaseCommand):
 
         # Create products
         products_data = [
-            ('Widget Pro', 'High-quality professional widget', Decimal('29.99'),
-             Product.APPROVED, acme, created_users['acme_admin']),
-            ('Gadget Plus', 'Advanced gadget with premium features', Decimal('49.99'),
-             Product.PENDING_APPROVAL, acme, created_users['acme_editor']),
-            ('Tool Basic', 'Essential tool for everyday use', Decimal('9.99'),
-             Product.DRAFT, acme, created_users['acme_editor']),
-            ('Globex Device', 'Cutting-edge technology device', Decimal('99.99'),
-             Product.APPROVED, globex, created_users['globex_admin']),
+            ('Widget Pro', 'High-quality professional widget for enterprise teams. Built with precision engineering and designed for maximum productivity.',
+             Decimal('29.99'), Product.APPROVED, acme, created_users['acme_admin'],
+             'https://picsum.photos/seed/widget/600/400'),
+            ('Gadget Plus', 'Advanced gadget with premium features and seamless integration. Perfect for modern workflows.',
+             Decimal('49.99'), Product.PENDING_APPROVAL, acme, created_users['acme_editor'],
+             'https://picsum.photos/seed/gadget/600/400'),
+            ('Tool Basic', 'Essential tool for everyday use. Simple, reliable, and affordable for teams of any size.',
+             Decimal('9.99'), Product.DRAFT, acme, created_users['acme_editor'],
+             'https://picsum.photos/seed/tool/600/400'),
+            ('Globex Device', 'Cutting-edge technology device powered by next-gen AI. Redefining what\'s possible.',
+             Decimal('99.99'), Product.APPROVED, globex, created_users['globex_admin'],
+             'https://picsum.photos/seed/device/600/400'),
+            ('Smart Sensor', 'IoT-ready smart sensor with real-time analytics dashboard and cloud connectivity.',
+             Decimal('39.99'), Product.APPROVED, acme, created_users['acme_admin'],
+             'https://picsum.photos/seed/sensor/600/400'),
+            ('Power Hub', 'Central power management hub for your entire office. Energy-efficient and smart-grid compatible.',
+             Decimal('149.99'), Product.APPROVED, globex, created_users['globex_admin'],
+             'https://picsum.photos/seed/powerhub/600/400'),
+            ('CloudSync Box', 'Automatic cloud synchronization appliance. Set it and forget it — your data, everywhere.',
+             Decimal('79.99'), Product.APPROVED, acme, created_users['acme_editor'],
+             'https://picsum.photos/seed/cloudsync/600/400'),
+            ('Nano Tracker', 'Ultra-compact asset tracker with 6-month battery life and global coverage.',
+             Decimal('19.99'), Product.PENDING_APPROVAL, globex, created_users['globex_admin'],
+             'https://picsum.photos/seed/tracker/600/400'),
         ]
 
-        for name, desc, price, st, business, creator in products_data:
+        for name, desc, price, st, business, creator, image_url in products_data:
             Product.objects.get_or_create(
                 name=name,
                 business=business,
@@ -81,6 +97,7 @@ class Command(BaseCommand):
                     'description': desc,
                     'price': price,
                     'status': st,
+                    'image_url': image_url,
                     'created_by': creator,
                 },
             )

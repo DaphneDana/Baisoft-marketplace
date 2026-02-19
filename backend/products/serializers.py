@@ -8,7 +8,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'price', 'status',
+        fields = ['id', 'name', 'description', 'price', 'image_url', 'status',
                   'business', 'business_name', 'created_by', 'created_by_username',
                   'created_at', 'updated_at']
         read_only_fields = ['business', 'created_by', 'status']
@@ -19,4 +19,4 @@ class PublicProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'price', 'business_name', 'created_at']
+        fields = ['id', 'name', 'description', 'price', 'image_url', 'business_name', 'created_at']
