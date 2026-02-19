@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import api from '@/lib/api';
 
 export default function RegisterPage() {
@@ -47,106 +48,126 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-16">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Register Your Business</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {error && <p className="text-red-600 text-sm">{error}</p>}
-
-        <h2 className="text-lg font-semibold text-gray-800 pt-2">Business Details</h2>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Business Name</label>
-          <input
-            type="text"
-            name="business_name"
-            value={formData.business_name}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+    <div className="min-h-[calc(100vh-4rem)] flex">
+      {/* Left Photo Panel */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden flex-col">
+        <Image
+          src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+          alt="Register"
+          fill
+          className="object-cover"
+          priority
+          sizes="50vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-slate-900/70" />
+        <div className="relative flex flex-col justify-center h-full px-12 xl:px-16">
+          <h2 className="text-3xl xl:text-4xl font-bold text-white leading-tight">
+            Start selling on
+            <span className="block text-blue-300 mt-1">Marketplace</span>
+          </h2>
+          <p className="mt-5 text-blue-100 text-base max-w-sm">
+            Create your business account and start listing products in minutes. Join hundreds of trusted sellers.
+          </p>
+          <ul className="mt-8 space-y-3">
+            {[
+              'Create your business in seconds',
+              'Add unlimited products',
+              'Manage your team with roles',
+            ].map((feat) => (
+              <li key={feat} className="flex items-center gap-3 text-blue-100 text-sm">
+                <div className="w-5 h-5 rounded-full bg-blue-500/30 border border-blue-400/40 flex items-center justify-center shrink-0">
+                  <svg className="w-3 h-3 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                {feat}
+              </li>
+            ))}
+          </ul>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Business Description</label>
-          <textarea
-            name="business_description"
-            value={formData.business_description}
-            onChange={handleChange}
-            rows={2}
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+      </div>
 
-        <h2 className="text-lg font-semibold text-gray-800 pt-2">Admin Account</h2>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">First Name</label>
-            <input
-              type="text"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+      {/* Right Form Panel */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-white overflow-y-auto">
+        <div className="w-full max-w-md">
+          <div className="mb-8">
+            <h1 className="text-2xl font-bold text-slate-900">Register Your Business</h1>
+            <p className="mt-2 text-sm text-slate-500">Set up your business and admin account</p>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Last Name</label>
-            <input
-              type="text"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            minLength={6}
-            className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? 'Creating...' : 'Register'}
-        </button>
-      </form>
-      <p className="mt-4 text-center text-sm text-gray-600">
-        Already have an account?{' '}
-        <Link href="/login" className="text-blue-600 hover:underline">
-          Login
-        </Link>
-      </p>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="flex items-center gap-3 bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-lg px-4 py-3">
+                <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                {error}
+              </div>
+            )}
+
+            {/* Business Details */}
+            <div className="bg-slate-50 rounded-xl p-5 space-y-4 border border-slate-100">
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Business Details</p>
+              <div>
+                <label className="label">Business Name</label>
+                <input type="text" name="business_name" value={formData.business_name} onChange={handleChange} required className="input-field" placeholder="Acme Corp" />
+              </div>
+              <div>
+                <label className="label">Business Description</label>
+                <textarea name="business_description" value={formData.business_description} onChange={handleChange} rows={2} className="input-field" placeholder="What does your business do?" />
+              </div>
+            </div>
+
+            {/* Admin Account */}
+            <div className="bg-slate-50 rounded-xl p-5 space-y-4 border border-slate-100">
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Admin Account</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="label">First Name</label>
+                  <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} className="input-field" />
+                </div>
+                <div>
+                  <label className="label">Last Name</label>
+                  <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} className="input-field" />
+                </div>
+              </div>
+              <div>
+                <label className="label">Username</label>
+                <input type="text" name="username" value={formData.username} onChange={handleChange} required className="input-field" placeholder="johndoe" />
+              </div>
+              <div>
+                <label className="label">Email</label>
+                <input type="email" name="email" value={formData.email} onChange={handleChange} required className="input-field" placeholder="john@example.com" />
+              </div>
+              <div>
+                <label className="label">Password</label>
+                <input type="password" name="password" value={formData.password} onChange={handleChange} required minLength={6} className="input-field" placeholder="At least 6 characters" />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary w-full justify-center py-2.5 flex items-center gap-2"
+            >
+              {loading && (
+                <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+              )}
+              {loading ? 'Creating account...' : 'Create Account'}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-slate-500">
+            Already have an account?{' '}
+            <Link href="/login" className="text-blue-600 font-semibold hover:text-blue-500">
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
