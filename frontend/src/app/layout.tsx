@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from "next"; 
+ import "./globals.css";
 import { Providers } from "./providers";
 import Navbar from "@/components/Navbar";
 
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased bg-white min-h-screen">
+      <body className= "antialiased bg-white min-h-screen">
         <Providers>
           <Navbar />
           {children}
