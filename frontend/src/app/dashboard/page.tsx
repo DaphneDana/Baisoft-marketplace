@@ -1,5 +1,5 @@
 'use client';
-
+/*dashboard page */
 import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
