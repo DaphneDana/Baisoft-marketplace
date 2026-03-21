@@ -1,5 +1,5 @@
 'use client';
-
+/* main products page */
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
