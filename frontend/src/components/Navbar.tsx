@@ -1,5 +1,5 @@
 'use client';
-
+/*Navigation bar component */
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
