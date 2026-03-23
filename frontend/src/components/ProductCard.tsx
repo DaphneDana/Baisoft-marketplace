@@ -1,5 +1,5 @@
 import Image from 'next/image';
-
+/*product card component */
 interface ProductCardProps {
   name: string;
   description: string;
