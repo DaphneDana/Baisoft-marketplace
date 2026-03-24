@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
+""" This file contains the models for the accounts app, including Business, Role, and User. """
 class Business(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default='')
