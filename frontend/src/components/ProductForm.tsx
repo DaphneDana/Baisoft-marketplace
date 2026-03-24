@@ -1,5 +1,5 @@
 'use client';
-
+/* ProductForm.tsx - A reusable form component for creating and editing products. */
 import { useState } from 'react';
 import Image from 'next/image';
 
